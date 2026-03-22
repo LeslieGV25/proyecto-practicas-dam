@@ -19,6 +19,12 @@
 
 *DATOS_DOMICILIO* (id_domicilio [PK], direccion_envio, codigo_postal, telefono_contacto, notas_repartidor, id_pedido [FK], id_repartidor [FK])
 
+*RESERVAS* (id_reserva [PK], fecha, hora, numero_personas, estado [confirmada, cancelada, finalizada], id_cliente [FK], id_mesa [FK])
+
+*INGREDIENTES* (id_ingrediente [PK], nombre, cantidad_actual, unidad_medida [kg, l, unidades], stock_minimo)
+
+*MOVIMIENTOS_ALMACEN* (id_movimiento [PK], tipo [entrada, salida, ajuste], cantidad, fecha, id_ingrediente [FK], id_usuario [FK - quien lo marcó])
+
 2. **Relaciones y Cardinalidad**
 
 USUARIOS - PEDIDOS (1:N): Un usuario (camarero) puede registrar muchos pedidos. Un pedido pertenece a un único usuario.
@@ -36,3 +42,13 @@ PRODUCTOS - DETALLE_PEDIDO (1:N): Un producto puede aparecer en muchos detalles 
 PEDIDOS - DATOS_DOMICILIO (1:1): Un pedido de tipo "domicilio" tiene una única entrada de datos de envío.
 
 USUARIOS (Repartidor) - DATOS_DOMICILIO (1:N): Un repartidor puede entregar muchos pedidos a domicilio.
+
+*Gestión de Reservas*
+CLIENTES - RESERVAS (1:N): Un cliente puede realizar muchas reservas (a lo largo del tiempo), pero una reserva específica pertenece a un solo cliente.
+
+MESAS - RESERVAS (1:N): Una mesa puede tener muchas reservas programadas (en diferentes horas/días), pero una reserva se asigna a una sola mesa.
+
+*Gestión de almacén*
+INGREDIENTES - MOVIMIENTOS_ALMACEN (1:N): Un ingrediente (ej: "Tomate") puede tener muchos movimientos de entrada o salida. Un movimiento registrado se refiere a un solo ingrediente.
+
+USUARIOS - MOVIMIENTOS_ALMACEN (1:N): Un usuario (cocinero/admin) puede realizar muchos registros de stock. Cada registro de movimiento identifica a un solo usuario responsable.
