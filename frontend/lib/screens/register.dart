@@ -48,7 +48,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: Text(
                     "Completa tus datos para continuar",
                     style: TextStyle(
-                      color: AppColors.textSecundary,
+                      color: AppColors.textSecondary,
                       fontSize: 16,
                     ),
                   ),
@@ -121,7 +121,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   onPressed: () => Navigator.pop(context),
                   child: const Text(
                     "¿Ya tienes cuenta? Volver",
-                    style: TextStyle(color: AppColors.textSecundary),
+                    style: TextStyle(color: AppColors.textSecondary),
                   ),
                 ),
               ],
@@ -144,9 +144,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
         keyboardType: keyboardType,
         style: const TextStyle(color: AppColors.textPrimary),
         decoration: InputDecoration(
-          prefixIcon: Icon(icon, color: AppColors.iconDetail), // Icono Dorado
+          prefixIcon: Icon(icon, color: AppColors.gold), // Icono Dorado
           labelText: label,
-          labelStyle: const TextStyle(color: AppColors.textSecundary),
+          labelStyle: const TextStyle(color: AppColors.textSecondary),
           filled: true,
           fillColor: AppColors.panel, // Fondo Gris muy oscuro
           enabledBorder: OutlineInputBorder(
@@ -176,7 +176,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         decoration: InputDecoration(
           prefixIcon: const Icon(
             Icons.lock_outline,
-            color: AppColors.iconDetail,
+            color: AppColors.gold,
           ),
           suffixIcon: IconButton(
             icon: Icon(
@@ -188,7 +188,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             onPressed: () => setState(() => _obscureText = !_obscureText),
           ),
           labelText: label,
-          labelStyle: const TextStyle(color: AppColors.textSecundary),
+          labelStyle: const TextStyle(color: AppColors.textSecondary),
           filled: true,
           fillColor: AppColors.panel,
           enabledBorder: OutlineInputBorder(
