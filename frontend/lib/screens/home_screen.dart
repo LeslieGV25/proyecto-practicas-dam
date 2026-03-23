@@ -23,9 +23,18 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(20),
           child: Column(
-          
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text("Bienvenido", style: TextStyle(
+                fontSize: 26, fontWeight: FontWeight.bold
+              )),
+              const SizedBox(height: 10,),
+              const Text("Selecciona una opcion", style: TextStyle(
+                fontSize: 16, color: AppColors.panel;
+              ))
+            ],
                 ),
         )
       ),
