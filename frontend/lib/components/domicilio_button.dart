@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/colors_style.dart';
+import 'package:frontend/screens/login_screen.dart';
 
 class DomicilioButton extends StatefulWidget {
   const DomicilioButton({super.key});
@@ -17,7 +18,7 @@ class _DomicilioButtonState extends State<DomicilioButton> {
       //WIDGET QUE CONVIERTE EL CONTAINER EN BOTON
       child: GestureDetector(
         onTap: () {
-            //RELLENAR PARA ABRIR LA CAMARA Y ESCANEE QR
+          Navigator.push(context, MaterialPageRoute(builder: (context) => loginScreen()));
         },
         child: Container(
             width: double.infinity,

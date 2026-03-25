@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/colors_style.dart';
 import 'package:frontend/screens/forgotten_password.dart';
-import 'package:frontend/screens/register.dart';
+import 'package:frontend/screens/menu_screen.dart';
+import 'package:frontend/screens/register_screen.dart';
 
 class loginScreen extends StatefulWidget {
   const loginScreen({super.key});
@@ -82,7 +83,7 @@ class _MyWidgetState extends State<loginScreen> {
                     onPressed: () {
                       Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => loginScreen()),  // Direccionar a la pantalla de menú
+                    MaterialPageRoute(builder: (context) => MenuScreen()),  // Direccionar a la pantalla de menú
                   );
                         
                       }
@@ -137,7 +138,7 @@ class _MyWidgetState extends State<loginScreen> {
         decoration: InputDecoration(
           prefixIcon: const Icon(
             Icons.lock_outline,
-            color: AppColors.iconDetail,
+            color: AppColors.gold,
           ),
           suffixIcon: IconButton(
             icon: Icon(
@@ -149,7 +150,7 @@ class _MyWidgetState extends State<loginScreen> {
             onPressed: () => setState(() => _obscureText = !_obscureText),
           ),
           labelText: label,
-          labelStyle: const TextStyle(color: AppColors.textSecundary),
+          labelStyle: const TextStyle(color: AppColors.textSecondary),
           filled: true,
           fillColor: AppColors.panel,
           enabledBorder: OutlineInputBorder(
@@ -176,9 +177,9 @@ class _MyWidgetState extends State<loginScreen> {
         keyboardType: keyboardType,
         style: const TextStyle(color: AppColors.textPrimary),
         decoration: InputDecoration(
-          prefixIcon: Icon(icon, color: AppColors.iconDetail), // Icono Dorado
+          prefixIcon: Icon(icon, color: AppColors.gold), // Icono Dorado
           labelText: label,
-          labelStyle: const TextStyle(color: AppColors.textSecundary),
+          labelStyle: const TextStyle(color: AppColors.textSecondary),
           filled: true,
           fillColor: AppColors.panel, // Fondo Gris muy oscuro
           enabledBorder: OutlineInputBorder(

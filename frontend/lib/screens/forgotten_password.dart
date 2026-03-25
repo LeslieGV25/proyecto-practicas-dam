@@ -56,9 +56,9 @@ Widget _customInput({
       keyboardType: keyboardType,
       style: const TextStyle(color: AppColors.textPrimary),
       decoration: InputDecoration(
-        prefixIcon: Icon(icon, color: AppColors.iconDetail), // Icono Dorado
+        prefixIcon: Icon(icon, color: AppColors.gold), // Icono Dorado
         labelText: label,
-        labelStyle: const TextStyle(color: AppColors.textSecundary),
+        labelStyle: const TextStyle(color: AppColors.textSecondary),
         filled: true,
         fillColor: AppColors.panel, // Fondo Gris muy oscuro
         enabledBorder: OutlineInputBorder(
