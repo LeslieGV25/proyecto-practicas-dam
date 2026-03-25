@@ -18,7 +18,7 @@ class EntradaTexto extends StatelessWidget {
     this.mostrarTexto,
     this.alPresionarIcono,
     this.tipoTeclado = TextInputType.text,
-    this.validador,
+    this.validador, 
   });
 
   @override
