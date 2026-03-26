@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../core/colors_style.dart';
+import '../../core/colors_style.dart';
 
 class EntradaTexto extends StatelessWidget {
   final String etiqueta; // El texto que flota (Label)

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/colors_style.dart';
-import 'package:frontend/screens/login_screen.dart';
 
-class DomicilioButton extends StatefulWidget {
-  const DomicilioButton({super.key});
+class ReservarMesa extends StatefulWidget {
+  const ReservarMesa({super.key});
 
   @override
-  State<DomicilioButton> createState() => _DomicilioButtonState();
+  State<ReservarMesa> createState() => _ReservarMesaState();
 }
 
-class _DomicilioButtonState extends State<DomicilioButton> {
+class _ReservarMesaState extends State<ReservarMesa> {
   @override
   Widget build(BuildContext context) {
     //AÑADO PADDING
@@ -18,7 +17,7 @@ class _DomicilioButtonState extends State<DomicilioButton> {
       //WIDGET QUE CONVIERTE EL CONTAINER EN BOTON
       child: GestureDetector(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+            //REDIRECCIONA A SCREEN RESERVAR MESA
         },
         child: Container(
             width: double.infinity,
@@ -30,10 +29,10 @@ class _DomicilioButtonState extends State<DomicilioButton> {
              child: Column(
               children: [
                 //ICONO DEL QR
-              Icon(Icons.motorcycle, size: 100, color: AppColors.iconPrimary,),
+              Icon(Icons.table_bar_rounded, size: 100, color: AppColors.iconPrimary,),
               //BOTON DE QR SCAN
-              Text("HACER PEDIDO", style: TextStyle(
-                fontSize: 32, color: AppColors.textPrimary, fontWeight: FontWeight.bold
+              Text("RESERVA YA", style: TextStyle(
+                fontSize: 32, color: AppColors.textPrimary
               ),)
               ],
               

@@ -12,6 +12,7 @@ dependencies:
 
   # Dependencia del lector QR
   mobile_scanner: ^3.5.0
+  google_fonts: ^6.1.0
 
 dev_dependencies:
   flutter_test:

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/components/entrada_texto.dart';
+import 'package:frontend/components/Cliente/entrada_texto.dart';
 import 'package:frontend/core/colors_style.dart';
 
 class ForgottenPassword extends StatefulWidget {

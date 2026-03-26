@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/colors_style.dart';
-import 'package:frontend/screens/scanner_qr.dart';
+import 'package:frontend/screens/Cliente/login_screen.dart';
 
-class CodigoQr extends StatefulWidget {
-  const CodigoQr({super.key});
+class DomicilioButton extends StatefulWidget {
+  const DomicilioButton({super.key});
 
   @override
-  State<CodigoQr> createState() => _CodigoQrState();
+  State<DomicilioButton> createState() => _DomicilioButtonState();
 }
 
-class _CodigoQrState extends State<CodigoQr> {
+class _DomicilioButtonState extends State<DomicilioButton> {
   @override
   Widget build(BuildContext context) {
     //AÑADO PADDING
@@ -18,11 +18,7 @@ class _CodigoQrState extends State<CodigoQr> {
       //WIDGET QUE CONVIERTE EL CONTAINER EN BOTON
       child: GestureDetector(
         onTap: () {
-            //VENTANA SCANNER QR
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const QRScanner()),
-            );
+          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
         },
         child: Container(
             width: double.infinity,
@@ -34,10 +30,10 @@ class _CodigoQrState extends State<CodigoQr> {
              child: Column(
               children: [
                 //ICONO DEL QR
-              Icon(Icons.qr_code_sharp, size: 100, color: AppColors.iconPrimary,),
+              Icon(Icons.motorcycle, size: 100, color: AppColors.iconPrimary,),
               //BOTON DE QR SCAN
-              Text("QR", style: TextStyle(
-                fontSize: 32, color: AppColors.textPrimary, fontWeight: FontWeight.bold
+              Text("HACER PEDIDO", style: TextStyle(
+                fontSize: 32, color: AppColors.textPrimary
               ),)
               ],
               

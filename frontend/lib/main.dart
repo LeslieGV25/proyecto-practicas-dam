@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/colors_style.dart';
-import 'package:frontend/screens/home_screen.dart';
+import 'package:frontend/screens/Cliente/home_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 
 void main() {
@@ -13,6 +14,9 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        textTheme: GoogleFonts.frederickaTheGreatTextTheme(),
+      ),
       home: Scaffold(
         backgroundColor: AppColors.background,
         body: HomeScreen(),

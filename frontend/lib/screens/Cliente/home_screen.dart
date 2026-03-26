@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/components/codigo_qr.dart';
-import 'package:frontend/components/domicilio_button.dart';
-import 'package:frontend/components/reservar_mesa.dart';
+import 'package:frontend/components/Cliente/codigo_qr.dart';
+import 'package:frontend/components/Cliente/domicilio_button.dart';
+import 'package:frontend/components/Cliente/reservar_mesa.dart';
 import 'package:frontend/core/colors_style.dart';
 //import 'package:frontend/screens/login_screen.dart';
 
@@ -33,7 +33,7 @@ Widget build(BuildContext context) {
             backgroundColor: Colors.transparent,
             elevation: 0,
             toolbarHeight: 48,
-            leading: const Icon(Icons.room_service, color: AppColors.button, size: 28),
+            leading: const Icon(Icons.room_service, color: AppColors.button, size: 40),
             title: const Text(
               "Tu Restaurante",
               style: TextStyle(color: AppColors.textPrimary, fontSize: 20),
@@ -56,8 +56,6 @@ Widget build(BuildContext context) {
                     "Bienvenido",
                     style: TextStyle(
                       fontSize: 32,
-                      fontFamily: 'PlayfairDisplay',
-                      fontWeight: FontWeight.bold,
                       color: AppColors.textPrimary,
                     ),
                   ),

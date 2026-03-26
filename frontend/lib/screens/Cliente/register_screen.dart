@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../core/colors_style.dart';
-import '../components/entrada_texto.dart';
-import '../components/crear_cuenta_button.dart'; // Importamos el nuevo botón
+import '../../core/colors_style.dart';
+import '../../components/Cliente/entrada_texto.dart';
+import '../../components/Cliente/crear_cuenta_button.dart'; // Importamos el nuevo botón
 import 'home_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
