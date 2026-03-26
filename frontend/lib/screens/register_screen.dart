@@ -1,25 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:frontend/screens/login_screen.dart';
 import '../core/colors_style.dart';
 import '../components/entrada_texto.dart';
 import '../components/crear_cuenta_button.dart';
 import '../providers/auth_provider.dart';
+import 'login_screen.dart';
 import 'menu_screen.dart';
-<<<<<<< HEAD:frontend/lib/screens/Cliente/register_screen.dart
-import '../core/colors_style.dart';
-import '../components/entrada_texto.dart';
-import '../components/crear_cuenta_button.dart'; // Importamos el nuevo botón
-import 'home_screen.dart';
-=======
-import 'package:provider/provider.dart';
-import 'package:frontend/screens/login_screen.dart';
-import 'core/colors_style.dart';
-import 'components/entrada_texto.dart';
-import 'components/crear_cuenta_button.dart';
-import 'providers/auth_provider.dart';
-import 'menu_screen.dart';
->>>>>>> origin/main:frontend/lib/screens/register_screen.dart
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});

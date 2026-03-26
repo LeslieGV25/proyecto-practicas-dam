@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../core/colors_style.dart';
 import '../data/mock_data.dart';
 import '../components/producto_card.dart';
 import '../models/producto_model.dart';
+import '../providers/cart_provider.dart';
+import 'confirmar_pedido_screen.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
