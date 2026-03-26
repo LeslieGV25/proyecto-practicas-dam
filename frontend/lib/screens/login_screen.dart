@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:frontend/core/colors_style.dart';
 import 'package:frontend/screens/forgotten_password.dart';
 import 'package:frontend/screens/menu_screen.dart';
 import 'package:frontend/screens/register_screen.dart';
 import 'package:frontend/components/entrada_texto.dart';
+import 'package:frontend/providers/auth_provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,6 +18,13 @@ class _LoginScreenState extends State<LoginScreen> {
   // Variable para controlar si se muestra la contraseña o no
   bool _oscurecerContrasena = true;
 
+  // Controladores para los campos de texto
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  // Variable para mostrar loading
+  bool _isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: SingleChildScrollView(
         child: SizedBox(
           // Ajustamos el alto para que los Spacers funcionen bien sin desbordar
-          height: MediaQuery.of(context).size.height - 100, 
+          height: MediaQuery.of(context).size.height - 100,
           child: bodyLogin(),
         ),
       ),
@@ -37,15 +46,15 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Column(
         children: [
           const Spacer(flex: 2),
-          
+
           // --- Cabecera ---
           Text(
             "Iniciar Sesión",
             style: TextStyle(
-              color: AppColors.textPrimary, 
-              fontSize: 32, 
+              color: AppColors.textPrimary,
+              fontSize: 32,
               fontWeight: FontWeight.bold,
-              letterSpacing: 1.5
+              letterSpacing: 1.5,
             ),
           ),
           const SizedBox(height: 10),
@@ -53,39 +62,49 @@ class _LoginScreenState extends State<LoginScreen> {
             "Bienvenido a NombreRestaurante",
             style: TextStyle(color: Colors.grey, fontSize: 16),
           ),
-          
+
           const Spacer(flex: 2),
 
           // --- Inputs ---
           EntradaTexto(
-            etiqueta: "Correo electrónico", 
+            etiqueta: "Correo electrónico",
             icono: Icons.mail_outline,
             tipoTeclado: TextInputType.emailAddress,
+            controlador: _emailController,
           ),
-          
+
           EntradaTexto(
-            etiqueta: 'Contraseña', 
+            etiqueta: 'Contraseña',
             icono: Icons.lock_outline,
-            esContrasena: true, 
+            esContrasena: true,
             // Usamos nuestra variable de estado
-            mostrarTexto: _oscurecerContrasena, 
+            mostrarTexto: _oscurecerContrasena,
             // Función para cambiar el estado al tocar el ojo
             alPresionarIcono: () {
               setState(() {
                 _oscurecerContrasena = !_oscurecerContrasena;
               });
             },
+            controlador: _passwordController,
           ),
-          
+
           Align(
             alignment: Alignment.centerRight,
             child: TextButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ForgottenPassword()));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ForgottenPassword(),
+                  ),
+                );
               },
               child: Text(
                 "¿Olvidaste tu contraseña?",
-                style: TextStyle(color: AppColors.button, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                  color: AppColors.button,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),
@@ -101,14 +120,25 @@ class _LoginScreenState extends State<LoginScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text("¿Aún no tienes cuenta?", style: TextStyle(color: Colors.white70)),
+              const Text(
+                "¿Aún no tienes cuenta?",
+                style: TextStyle(color: Colors.white70),
+              ),
               TextButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterScreen()));
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const RegisterScreen(),
+                    ),
+                  );
                 },
                 child: Text(
                   "Regístrate",
-                  style: TextStyle(color: AppColors.button, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    color: AppColors.button,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ],
@@ -137,16 +167,22 @@ class _LoginScreenState extends State<LoginScreen> {
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.button,
           foregroundColor: AppColors.background,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
           elevation: 0,
         ),
-        onPressed: () {
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MenuScreen()));
-        },
-        child: const Text(
-          "ENTRAR",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, letterSpacing: 2),
-        ),
+        onPressed: _isLoading ? null : _iniciarSesion,
+        child: _isLoading
+            ? const CircularProgressIndicator(color: Colors.white)
+            : const Text(
+                "ENTRAR",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  letterSpacing: 2,
+                ),
+              ),
       ),
     );
   }
@@ -157,5 +193,41 @@ class _LoginScreenState extends State<LoginScreen> {
       elevation: 0,
       centerTitle: true,
     );
+  }
+
+  Future<void> _iniciarSesion() async {
+    final email = _emailController.text.trim();
+    final password = _passwordController.text;
+
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Por favor, completa todos los campos')),
+      );
+      return;
+    }
+
+    setState(() => _isLoading = true);
+
+    try {
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      final success = await authProvider.iniciarSesion(email, password);
+
+      if (success && mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const MenuScreen()),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error: ${e.toString()}')),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() => _isLoading = false);
+      }
+    }
   }
 }
