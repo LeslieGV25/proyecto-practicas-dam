@@ -2,9 +2,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  static const String baseUrl = 'http://localhost:8000';
-
-  // Registrar usuario
+  static const String baseUrl =
+      'http://localhost:8000'; //cambiar a url comun  // Registrar usuario
   static Future<Map<String, dynamic>> registrarUsuario({
     required String nombre,
     required String correo,
