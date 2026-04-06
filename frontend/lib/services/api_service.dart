@@ -9,7 +9,7 @@ import '../data/mock_data.dart';
 /// ╔══════════════════════════════════════════════════════════════╗
 /// ║  CAMBIAR A [true] CUANDO EL BACKEND ESTÉ LISTO             ║
 /// ╚══════════════════════════════════════════════════════════════╝
-const bool usarApiReal = false;
+const bool usarApiReal = true;
 
 class ApiService {
   static const String baseUrl = 'http://localhost:8000';
@@ -113,6 +113,49 @@ class ApiService {
         'direccion': direccion,
       }),
     );
+    return response.statusCode == 200;
+  }
+
+  /// Ver perfil de usuario
+  static Future<Map<String, dynamic>> verPerfil({
+    required String userId,
+  }) async {
+    if (!usarApiReal) {
+      await Future.delayed(const Duration(milliseconds: 300));
+
+      final usuario = MockData.usuarios.firstWhere(
+        (u) => u.id == userId,
+        orElse: () => throw Exception('Usuario no encontrado'),
+      );
+
+      return usuario.toJson();
+    }
+
+    final response = await http.get(
+      Uri.parse('$baseUrl/usuarios/$userId'),
+      headers: {'Content-Type': 'application/json'},
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body) as Map<String, dynamic>;
+    } else {
+      final error = jsonDecode(response.body);
+      throw Exception(error['detail'] ?? 'Error al obtener el perfil');
+    }
+  }
+
+  // eliminar usuario
+  static Future<bool> eliminarPerfil({required String userId}) async {
+    if (!usarApiReal) {
+      await Future.delayed(const Duration(milliseconds: 300));
+      return true;
+    }
+
+    final response = await http.delete(
+      Uri.parse('$baseUrl/usuarios/$userId'),
+      headers: {'Content-Type': 'application/json'},
+    );
+
     return response.statusCode == 200;
   }
 
@@ -329,10 +372,11 @@ class ApiService {
     final fechaStr =
         '${fecha.day.toString().padLeft(2, '0')}/${fecha.month.toString().padLeft(2, '0')}/${fecha.year}';
     return _buscarMesaDisponible(
-      fecha: fechaStr,
-      hora: hora,
-      comensales: comensales,
-    ) != null;
+          fecha: fechaStr,
+          hora: hora,
+          comensales: comensales,
+        ) !=
+        null;
   }
 
   /// Convierte "HH:mm" a minutos desde medianoche
@@ -358,17 +402,20 @@ class ApiService {
     required int comensales,
   }) {
     // Mesas candidatas ordenadas por capacidad ascendente (asignar la más justa)
-    final candidatas = MockData.mesas
-        .where((m) => m.capacidad >= comensales && m.disponible)
-        .toList()
-      ..sort((a, b) => a.capacidad.compareTo(b.capacidad));
+    final candidatas =
+        MockData.mesas
+            .where((m) => m.capacidad >= comensales && m.disponible)
+            .toList()
+          ..sort((a, b) => a.capacidad.compareTo(b.capacidad));
 
     for (final mesa in candidatas) {
-      final tieneConflicto = MockData.reservas.any((r) =>
-          r.mesaId == mesa.id &&
-          r.fecha == fecha &&
-          r.estado == 'Confirmada' &&
-          _hayConflictoHorario(r.hora, hora));
+      final tieneConflicto = MockData.reservas.any(
+        (r) =>
+            r.mesaId == mesa.id &&
+            r.fecha == fecha &&
+            r.estado == 'Confirmada' &&
+            _hayConflictoHorario(r.hora, hora),
+      );
 
       if (!tieneConflicto) return mesa;
     }
@@ -376,14 +423,10 @@ class ApiService {
   }
 
   /// Obtener reservas de un usuario
-  static Future<List<Reserva>> obtenerReservas({
-    required String userId,
-  }) async {
+  static Future<List<Reserva>> obtenerReservas({required String userId}) async {
     if (!usarApiReal) {
       await Future.delayed(const Duration(milliseconds: 400));
-      return MockData.reservas
-          .where((r) => r.usuarioId == userId)
-          .toList();
+      return MockData.reservas.where((r) => r.usuarioId == userId).toList();
     }
 
     final response = await http.get(
