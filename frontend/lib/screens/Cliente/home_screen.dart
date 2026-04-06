@@ -3,7 +3,12 @@ import 'package:frontend/components/Cliente/codigo_qr.dart';
 import 'package:frontend/components/Cliente/domicilio_button.dart';
 import 'package:frontend/components/Cliente/reservar_mesa.dart';
 import 'package:frontend/core/colors_style.dart';
-//import 'package:frontend/screens/login_screen.dart';
+
+// ─── Paleta 60-30-10 ───────────────────────────────────────────────
+// 60% → negro cálido profundo:  AppColors.background
+// 30% → marrón oscuro cálido:   AppColors.backgroundButton
+// 10% → dorado:                 AppColors.gold
+// ───────────────────────────────────────────────────────────────────
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,82 +19,113 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   @override
-Widget build(BuildContext context) {
-    return SafeArea(
-      child: Container(
-        margin: EdgeInsets.only(top: 20),
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
-          color: AppColors.background,
-          borderRadius: BorderRadius.circular(12),
-          border: Border.all(color:AppColors.gold, width: 1)
-        ),
-        
-        child: Scaffold(
-          backgroundColor: Colors.transparent, 
-          //APP BAR CON EL TITULO DE LA APLICACIÓN
-          appBar: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            toolbarHeight: 48,
-            leading: const Icon(Icons.room_service, color: AppColors.button, size: 40),
-            title: const Text(
-              "Tu Restaurante",
-              style: TextStyle(color: AppColors.textPrimary, fontSize: 20),
-            ),
-            shape: Border(
-              bottom: BorderSide(
-                color:AppColors.line,
-                width: 0.5
-              )
-            ),
-          ),
-          body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  //TEXTO DE ARRIBA DE LA PAGINA 
-                  const Text(
-                    "Bienvenido",
-                    style: TextStyle(
-                      fontSize: 32,
-                      color: AppColors.textPrimary,
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.background,
+      body: SafeArea(
+        child: Column(
+          children: [
+            _buildHeader(),
+            Expanded(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.fromLTRB(20, 28, 20, 28),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      "SELECCIONA UNA OPCIÓN:",
+                      style: TextStyle(
+                        color: Color(0xFF7a6a50),
+                        fontSize: 10,
+                        letterSpacing: 2.5,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  const Text(
-                    "Selecciona una opción:",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: AppColors.textSecondary,
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 200,
-                    child: CodigoQr(),
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 200,
-                    child: DomicilioButton(),
-                  ),
-                   SizedBox(
-                    width: double.infinity,
-                    height: 200,
-                    child: ReservarMesa(),
-                  )
-                  
-                ],
+                    const SizedBox(height: 40),
+                    // Sin wrapper — cada componente ya lleva su propio diseño
+                    const CodigoQr(),
+                    const SizedBox(height: 40),
+                    const DomicilioButton(),
+                    const SizedBox(height: 40),
+                    const ReservarMesa(),
+                  ],
+                ),
               ),
             ),
-          ),
+          ],
         ),
       ),
     );
-  
-}}
+  }
+
+  Widget _buildHeader() {
+    return Container(
+      width: double.infinity,
+      color: AppColors.backgroundButton,
+      padding: const EdgeInsets.fromLTRB(20, 24, 20, 20),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: AppColors.gold, width: 1.5),
+                ),
+                child: const Icon(
+                  Icons.room_service_outlined,
+                  color: AppColors.gold,
+                  size: 20,
+                ),
+              ),
+              const SizedBox(width: 12),
+              const Text(
+                "Tu Restaurante",
+                style: TextStyle(
+                  fontFamily: 'Playfair Display',
+                  color: Color(0xFFF5ECD4),
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 0.5,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Text(
+            "BIENVENIDO",
+            style: TextStyle(
+              color: AppColors.gold.withOpacity(0.8),
+              fontSize: 10,
+              letterSpacing: 3,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          const SizedBox(height: 16),
+          Row(
+            children: [
+              const Expanded(child: Divider(color: Color(0xFF2e2418))),
+              Container(
+                width: 60,
+                height: 1.5,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.transparent,
+                      AppColors.gold,
+                      Colors.transparent,
+                    ],
+                  ),
+                ),
+              ),
+              const Expanded(child: Divider(color: Color(0xFF2e2418))),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
