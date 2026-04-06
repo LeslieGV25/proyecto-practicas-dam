@@ -12,42 +12,85 @@ class ReservarMesa extends StatefulWidget {
 class _ReservarMesaState extends State<ReservarMesa> {
   @override
   Widget build(BuildContext context) {
-    //AÑADO PADDING
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      //WIDGET QUE CONVIERTE EL CONTAINER EN BOTON
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) =>
-                  const LoginScreen(destino: DestinoLogin.reservar),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LoginScreen()),
+        );
+      },
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: AppColors.backgroundButton,
+          border: Border.all(color: const Color(0xFF2e2418)),
+          borderRadius: BorderRadius.circular(14),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Línea dorada izquierda — acento 10%
+            Container(
+              width: 3,
+              height: 56,
+              decoration: BoxDecoration(
+                color: AppColors.gold,
+                borderRadius: BorderRadius.circular(3),
+              ),
             ),
-          );
-        },
-        child: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: AppColors.background,
-            border: Border.all(color: AppColors.gold),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Column(
-            children: [
-              //ICONO DEL QR
-              Icon(
+            const SizedBox(width: 16),
+            // Icono
+            Container(
+              width: 56,
+              height: 56,
+              decoration: BoxDecoration(
+                color: const Color(0xFF251D12),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: const Color(0xFF3a2e1e)),
+              ),
+              child: const Icon(
                 Icons.table_bar_rounded,
-                size: 100,
-                color: AppColors.iconPrimary,
+                color: AppColors.gold,
+                size: 28,
               ),
-              //BOTON DE QR SCAN
-              Text(
-                "RESERVA YA",
-                style: TextStyle(fontSize: 32, color: AppColors.textPrimary),
+            ),
+            const SizedBox(width: 16),
+            // Textos
+            const Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Reservar mesa",
+                    style: TextStyle(
+                      color: Color(0xFFF0E4C8),
+                      fontSize: 17,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.2,
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    "Reserva ya tu mesa",
+                    style: TextStyle(
+                      color: Color(0xFF7a6a50),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w300,
+                      letterSpacing: 0.3,
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            // Flecha dorada
+            Icon(
+              Icons.chevron_right,
+              color: AppColors.gold.withOpacity(0.7),
+              size: 22,
+            ),
+          ],
         ),
       ),
     );

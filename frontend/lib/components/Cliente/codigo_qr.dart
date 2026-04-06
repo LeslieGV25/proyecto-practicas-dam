@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/core/colors_style.dart';
 import 'package:frontend/screens/Cliente/scanner_qr.dart';
-import 'package:frontend/screens/Cliente/login_screen.dart';
-import 'package:frontend/services/api_service.dart';
 
 class CodigoQr extends StatefulWidget {
   const CodigoQr({super.key});
@@ -14,66 +12,85 @@ class CodigoQr extends StatefulWidget {
 class _CodigoQrState extends State<CodigoQr> {
   @override
   Widget build(BuildContext context) {
-    //AÑADO PADDING
-    return Padding(
-      padding: const EdgeInsets.all(16),
-      //WIDGET QUE CONVIERTE EL CONTAINER EN BOTON
-      child: GestureDetector(
-        onTap: () async {
-          //VENTANA SCANNER QR
-          final resultado = await Navigator.push<String>(
-            context,
-            MaterialPageRoute(builder: (context) => const QRScanner()),
-          );
-
-          if (resultado != null && mounted) {
-            try {
-              final mesa = await ApiService.validarQrMesa(codigoQr: resultado);
-              if (!mounted) return;
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Mesa ${mesa['numero_mesa']} detectada'),
-                  backgroundColor: AppColors.button,
-                  duration: const Duration(seconds: 2),
-                ),
-              );
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const LoginScreen()),
-              );
-            } catch (e) {
-              if (!mounted) return;
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('QR no válido: ${e.toString()}'),
-                  backgroundColor: Colors.red,
-                ),
-              );
-            }
-          }
-        },
-        child: Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: AppColors.background,
-            border: Border.all(color: AppColors.gold),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: const Column(
-            children: [
-              //ICONO DEL QR
-              Icon(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const QRScanner()),
+        );
+      },
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: AppColors.backgroundButton,
+          border: Border.all(color: const Color(0xFF2e2418)),
+          borderRadius: BorderRadius.circular(14),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // Línea dorada izquierda — acento 10%
+            Container(
+              width: 3,
+              height: 56,
+              decoration: BoxDecoration(
+                color: AppColors.gold,
+                borderRadius: BorderRadius.circular(3),
+              ),
+            ),
+            const SizedBox(width: 16),
+            // Icono
+            Container(
+              width: 56,
+              height: 56,
+              decoration: BoxDecoration(
+                color: const Color(0xFF251D12),
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: const Color(0xFF3a2e1e)),
+              ),
+              child: const Icon(
                 Icons.qr_code_sharp,
-                size: 100,
-                color: AppColors.iconPrimary,
+                color: AppColors.gold,
+                size: 28,
               ),
-              //BOTON DE QR SCAN
-              Text(
-                "QR",
-                style: TextStyle(fontSize: 32, color: AppColors.textPrimary),
+            ),
+            const SizedBox(width: 16),
+            // Textos
+            const Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Escanear QR",
+                    style: TextStyle(
+                      color: Color(0xFFF0E4C8),
+                      fontSize: 17,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.2,
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    "Acceder a la mesa con código",
+                    style: TextStyle(
+                      color: Color(0xFF7a6a50),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w300,
+                      letterSpacing: 0.3,
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            // Flecha dorada
+            Icon(
+              Icons.chevron_right,
+              color: AppColors.gold.withOpacity(0.7),
+              size: 22,
+            ),
+          ],
         ),
       ),
     );
