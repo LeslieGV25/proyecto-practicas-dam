@@ -163,7 +163,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 backgroundColor: AppColors.button,
                 child: const Icon(
                   Icons.shopping_bag_outlined,
-                  color: Colors.black,
+                  color: Colors.white,
                   size: 28,
                 ),
               ),
@@ -236,7 +236,7 @@ class _MenuScreenState extends State<MenuScreen> {
               child: Text(
                 _categorias[index],
                 style: TextStyle(
-                  color: isSelected ? Colors.black : AppColors.textSecondary,
+                  color: isSelected ? Colors.white : AppColors.textSecondary,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                 ),
               ),

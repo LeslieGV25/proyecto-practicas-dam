@@ -49,6 +49,7 @@ class AuthProvider with ChangeNotifier {
         contrasena: contrasena,
         telefono: telefono,
         direccion: direccion,
+        rol: RolUsuario.cliente,
       );
 
       notifyListeners();

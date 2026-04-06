@@ -96,7 +96,7 @@ class ProductoCard extends StatelessWidget {
                       child: IconButton.filled(
                         style: IconButton.styleFrom(
                           backgroundColor: AppColors.button,
-                          foregroundColor: Colors.black,
+                          foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
