@@ -40,7 +40,7 @@ class AuthProvider with ChangeNotifier {
       final response = await ApiService.registrarUsuario(
         nombre: nombre,
         correo: email,
-        password_hash: contrasena,
+        contrasena: contrasena,
         telefono: telefono,
         direccion: direccion,
       );
