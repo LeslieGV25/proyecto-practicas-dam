@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import '../models/usuario_model.dart';
+import '../services/api_service.dart';
 
 class AuthProvider with ChangeNotifier {
   Usuario? _usuarioActual;
@@ -15,30 +14,15 @@ class AuthProvider with ChangeNotifier {
   // LOGIN REAL
   Future<bool> iniciarSesion(String email, String contrasena) async {
     try {
-      final response = await http.post(
-        Uri.parse('$_baseUrl/login'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'correo': email,
-          'password_hash': contrasena,
-        }),
+      final response = await ApiService.iniciarSesion(
+        correo: email,
+        contrasena: contrasena,
       );
 
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        // Aquí podrías crear el objeto usuario con lo que devuelve tu API
-        _usuarioActual = Usuario(
-          id: 'temp_id', 
-          nombre: data['nombre'],
-          email: email,
-          contrasena: contrasena,
-          telefono: '',
-          direccion: '',
-        );
-        notifyListeners();
-        return true;
-      }
-      return false;
+      _usuarioActual = Usuario.fromJson(response);
+
+      notifyListeners();
+      return true;
     } catch (e) {
       throw Exception('Error de conexión: $e');
     }
@@ -53,40 +37,66 @@ class AuthProvider with ChangeNotifier {
     required String direccion,
   }) async {
     try {
-      final response = await http.post(
-        Uri.parse('$_baseUrl/registro'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({
-          'nombre': nombre,
-          'correo': email,
-          'password_hash': contrasena,
-          'telefono': telefono,
-          'direccion': direccion,
-          'rol': 'cliente'
-        }),
+      final response = await ApiService.registrarUsuario(
+        nombre: nombre,
+        correo: email,
+        contrasena: contrasena,
+        telefono: telefono,
+        direccion: direccion,
       );
 
-      if (response.statusCode == 200) {
-        final responseData = jsonDecode(response.body);
-        _usuarioActual = Usuario(
-          id: responseData['id'],
-          nombre: nombre,
-          email: email,
-          contrasena: contrasena,
-          telefono: telefono,
-          direccion: direccion,
-        );
-        notifyListeners();
-        return true;
-      } else {
-        final errorMsg = jsonDecode(response.body)['detail'] ?? 'Error desconocido';
-        throw Exception(errorMsg);
-      }
+      _usuarioActual = Usuario(
+        id: response['id'] ?? '',
+        nombre: nombre,
+        email: email,
+        contrasena: contrasena,
+        telefono: telefono,
+        direccion: direccion,
+        rol: RolUsuario.cliente,
+      );
+
+      notifyListeners();
+      return true;
     } catch (e) {
-      throw Exception('Servidor no alcanzado. Revisa tu IP: $e');
+      rethrow;
     }
   }
 
+  // Método para actualizar perfil
+  Future<void> actualizarPerfil({
+    required String nombre,
+    required String email,
+    required String telefono,
+    required String direccion,
+  }) async {
+    if (_usuarioActual == null) return;
+
+    await ApiService.actualizarPerfil(
+      userId: _usuarioActual!.id,
+      nombre: nombre,
+      email: email,
+      telefono: telefono,
+      direccion: direccion,
+    );
+
+    _usuarioActual = _usuarioActual!.copyWith(
+      nombre: nombre,
+      email: email,
+      telefono: telefono,
+      direccion: direccion,
+    );
+    notifyListeners();
+  }
+
+  // Método para eliminar cuenta
+  Future<void> eliminarCuenta() async {
+    if (_usuarioActual == null) return;
+    await ApiService.eliminarCuenta(userId: _usuarioActual!.id);
+    _usuarioActual = null;
+    notifyListeners();
+  }
+
+  // Método para cerrar sesión
   void cerrarSesion() {
     _usuarioActual = null;
     notifyListeners();
