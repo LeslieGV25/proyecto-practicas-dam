@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/core/colors_style.dart';
 import 'package:frontend/screens/Cliente/login_screen.dart';
 
 class DomicilioButton extends StatefulWidget {
@@ -23,8 +22,8 @@ class _DomicilioButtonState extends State<DomicilioButton> {
         width: double.infinity,
         padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          color: AppColors.backgroundButton,
-          border: Border.all(color: const Color(0xFF2e2418)),
+          color: const Color(0xFF800020),
+          border: Border.all(color: const Color(0xFFA6405A)),
           borderRadius: BorderRadius.circular(14),
         ),
         child: Row(
@@ -35,7 +34,7 @@ class _DomicilioButtonState extends State<DomicilioButton> {
               width: 3,
               height: 56,
               decoration: BoxDecoration(
-                color: AppColors.gold,
+                color: const Color(0xFF1A1A1A),
                 borderRadius: BorderRadius.circular(3),
               ),
             ),
@@ -45,13 +44,13 @@ class _DomicilioButtonState extends State<DomicilioButton> {
               width: 56,
               height: 56,
               decoration: BoxDecoration(
-                color: const Color(0xFF251D12),
+                color: const Color(0xFF660019),
                 borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: const Color(0xFF3a2e1e)),
+                border: Border.all(color: const Color(0xFFA6405A)),
               ),
               child: const Icon(
                 Icons.motorcycle,
-                color: AppColors.gold,
+                color: Colors.white,
                 size: 28,
               ),
             ),
@@ -65,7 +64,7 @@ class _DomicilioButtonState extends State<DomicilioButton> {
                   Text(
                     "Hacer pedido",
                     style: TextStyle(
-                      color: Color(0xFFF0E4C8),
+                      color: Colors.white,
                       fontSize: 17,
                       fontWeight: FontWeight.w600,
                       letterSpacing: 0.2,
@@ -75,7 +74,7 @@ class _DomicilioButtonState extends State<DomicilioButton> {
                   Text(
                     "Pedir a domicilio",
                     style: TextStyle(
-                      color: Color(0xFF7a6a50),
+                      color: Color(0xFFEFEBE9),
                       fontSize: 12,
                       fontWeight: FontWeight.w300,
                       letterSpacing: 0.3,
@@ -87,7 +86,7 @@ class _DomicilioButtonState extends State<DomicilioButton> {
             // Flecha dorada
             Icon(
               Icons.chevron_right,
-              color: AppColors.gold.withOpacity(0.7),
+              color: Colors.white.withValues(alpha: 0.7),
               size: 22,
             ),
           ],

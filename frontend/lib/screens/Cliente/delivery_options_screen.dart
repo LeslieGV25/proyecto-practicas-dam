@@ -176,7 +176,7 @@ class _PantallaOpcionesEntregaState extends State<PantallaOpcionesEntrega> {
                 onPressed: _confirmarPedido,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.button,
-                  foregroundColor: AppColors.background,
+                  foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),

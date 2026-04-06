@@ -127,12 +127,27 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
 
   String _formatearFecha(DateTime fecha) {
     const meses = [
-      'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
-      'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre',
+      'enero',
+      'febrero',
+      'marzo',
+      'abril',
+      'mayo',
+      'junio',
+      'julio',
+      'agosto',
+      'septiembre',
+      'octubre',
+      'noviembre',
+      'diciembre',
     ];
     const dias = [
-      'Lunes', 'Martes', 'Miércoles', 'Jueves',
-      'Viernes', 'Sábado', 'Domingo',
+      'Lunes',
+      'Martes',
+      'Miércoles',
+      'Jueves',
+      'Viernes',
+      'Sábado',
+      'Domingo',
     ];
     return '${dias[fecha.weekday - 1]}, ${fecha.day} de ${meses[fecha.month - 1]}';
   }
@@ -186,18 +201,31 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _filaDetalle(Icons.calendar_today, _formatearFecha(_fechaSeleccionada)),
-              const SizedBox(height: 8),
               _filaDetalle(
-                _turnoSeleccionado == 'comida' ? Icons.wb_sunny : Icons.nightlight_round,
-                _turnoSeleccionado == 'comida' ? 'Turno de comida' : 'Turno de cena',
+                Icons.calendar_today,
+                _formatearFecha(_fechaSeleccionada),
               ),
               const SizedBox(height: 8),
-              _filaDetalle(Icons.access_time, _formatearHora(_horaSeleccionada)),
+              _filaDetalle(
+                _turnoSeleccionado == 'comida'
+                    ? Icons.wb_sunny
+                    : Icons.nightlight_round,
+                _turnoSeleccionado == 'comida'
+                    ? 'Turno de comida'
+                    : 'Turno de cena',
+              ),
+              const SizedBox(height: 8),
+              _filaDetalle(
+                Icons.access_time,
+                _formatearHora(_horaSeleccionada),
+              ),
               const SizedBox(height: 8),
               _filaDetalle(Icons.people, '$_numComensales comensales'),
               const SizedBox(height: 8),
-              _filaDetalle(Icons.table_bar, 'Mesa ${resultado.numeroMesa ?? "-"}'),
+              _filaDetalle(
+                Icons.table_bar,
+                'Mesa ${resultado.numeroMesa ?? "-"}',
+              ),
               if (_notasController.text.trim().isNotEmpty) ...[
                 const SizedBox(height: 8),
                 _filaDetalle(Icons.note, _notasController.text.trim()),
@@ -215,7 +243,7 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.button,
-                  foregroundColor: AppColors.background,
+                  foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -270,7 +298,10 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: const Text(
           '¿Cancelar reserva?',
-          style: TextStyle(color: AppColors.textPrimary, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            color: AppColors.textPrimary,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         content: const Text(
           'Esta acción no se puede deshacer.',
@@ -279,11 +310,17 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(false),
-            child: const Text('NO', style: TextStyle(color: AppColors.textSecondary)),
+            child: const Text(
+              'NO',
+              style: TextStyle(color: AppColors.textSecondary),
+            ),
           ),
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(true),
-            child: const Text('SÍ, CANCELAR', style: TextStyle(color: AppColors.error)),
+            child: const Text(
+              'SÍ, CANCELAR',
+              style: TextStyle(color: AppColors.error),
+            ),
           ),
         ],
       ),
@@ -320,7 +357,10 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
         Expanded(
           child: Text(
             texto,
-            style: const TextStyle(color: AppColors.textSecondary, fontSize: 14),
+            style: const TextStyle(
+              color: AppColors.textSecondary,
+              fontSize: 14,
+            ),
           ),
         ),
       ],
@@ -378,10 +418,7 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: [
-          _buildFormularioReserva(),
-          _buildMisReservas(),
-        ],
+        children: [_buildFormularioReserva(), _buildMisReservas()],
       ),
     );
   }
@@ -407,7 +444,9 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
             children: [
               Expanded(child: _botonTurno('comida', 'Comida', Icons.wb_sunny)),
               const SizedBox(width: 12),
-              Expanded(child: _botonTurno('cena', 'Cena', Icons.nightlight_round)),
+              Expanded(
+                child: _botonTurno('cena', 'Cena', Icons.nightlight_round),
+              ),
             ],
           ),
 
@@ -439,10 +478,16 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
                   const SizedBox(width: 12),
                   Text(
                     _formatearFecha(_fechaSeleccionada),
-                    style: const TextStyle(color: AppColors.textPrimary, fontSize: 16),
+                    style: const TextStyle(
+                      color: AppColors.textPrimary,
+                      fontSize: 16,
+                    ),
                   ),
                   const Spacer(),
-                  const Icon(Icons.chevron_right, color: AppColors.textSecondary),
+                  const Icon(
+                    Icons.chevron_right,
+                    color: AppColors.textSecondary,
+                  ),
                 ],
               ),
             ),
@@ -472,11 +517,16 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
               );
               final seleccionada = hora == _horaSeleccionada && disponible;
               return GestureDetector(
-                onTap: disponible ? () => setState(() => _horaSeleccionada = hora) : null,
+                onTap: disponible
+                    ? () => setState(() => _horaSeleccionada = hora)
+                    : null,
                 child: Opacity(
                   opacity: disponible ? 1.0 : 0.35,
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 18,
+                      vertical: 12,
+                    ),
                     decoration: BoxDecoration(
                       color: seleccionada ? AppColors.button : AppColors.panel,
                       borderRadius: BorderRadius.circular(10),
@@ -490,14 +540,21 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
                         Text(
                           horaStr,
                           style: TextStyle(
-                            color: seleccionada ? Colors.black : AppColors.textPrimary,
-                            fontWeight: seleccionada ? FontWeight.bold : FontWeight.normal,
+                            color: seleccionada
+                                ? Colors.white
+                                : AppColors.textPrimary,
+                            fontWeight: seleccionada
+                                ? FontWeight.bold
+                                : FontWeight.normal,
                           ),
                         ),
                         if (!disponible)
                           const Text(
                             'Completo',
-                            style: TextStyle(color: AppColors.error, fontSize: 10),
+                            style: TextStyle(
+                              color: AppColors.error,
+                              fontSize: 10,
+                            ),
                           ),
                       ],
                     ),
@@ -532,9 +589,9 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
                 IconButton(
                   onPressed: _numComensales > 1
                       ? () => setState(() {
-                            _numComensales--;
-                            _autoSeleccionarHoraDisponible();
-                          })
+                          _numComensales--;
+                          _autoSeleccionarHoraDisponible();
+                        })
                       : null,
                   icon: Icon(
                     Icons.remove_circle_outline,
@@ -544,7 +601,10 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
                 ),
                 const SizedBox(width: 20),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 10,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.background,
                     borderRadius: BorderRadius.circular(10),
@@ -562,13 +622,15 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
                 IconButton(
                   onPressed: _numComensales < 12
                       ? () => setState(() {
-                            _numComensales++;
-                            _autoSeleccionarHoraDisponible();
-                          })
+                          _numComensales++;
+                          _autoSeleccionarHoraDisponible();
+                        })
                       : null,
                   icon: Icon(
                     Icons.add_circle_outline,
-                    color: _numComensales < 12 ? AppColors.gold : AppColors.line,
+                    color: _numComensales < 12
+                        ? AppColors.gold
+                        : AppColors.line,
                     size: 32,
                   ),
                 ),
@@ -594,7 +656,9 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
             style: const TextStyle(color: AppColors.textPrimary),
             decoration: InputDecoration(
               hintText: 'Alergias, celebración, silla para niños...',
-              hintStyle: TextStyle(color: AppColors.textSecondary.withOpacity(0.5)),
+              hintStyle: TextStyle(
+                color: AppColors.textSecondary.withOpacity(0.5),
+              ),
               filled: true,
               fillColor: AppColors.panel,
               border: OutlineInputBorder(
@@ -622,7 +686,7 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
               onPressed: _isLoading ? null : _confirmarReserva,
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.button,
-                foregroundColor: AppColors.background,
+                foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
@@ -655,7 +719,9 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(vertical: 18),
         decoration: BoxDecoration(
-          color: seleccionado ? AppColors.button.withOpacity(0.15) : AppColors.panel,
+          color: seleccionado
+              ? AppColors.button.withOpacity(0.15)
+              : AppColors.panel,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
             color: seleccionado ? AppColors.button : AppColors.line,
@@ -673,7 +739,9 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
             Text(
               label,
               style: TextStyle(
-                color: seleccionado ? AppColors.textPrimary : AppColors.textSecondary,
+                color: seleccionado
+                    ? AppColors.textPrimary
+                    : AppColors.textSecondary,
                 fontWeight: seleccionado ? FontWeight.bold : FontWeight.normal,
                 fontSize: 15,
               ),
@@ -707,14 +775,15 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.event_busy, color: AppColors.textSecondary.withOpacity(0.4), size: 80),
+            Icon(
+              Icons.event_busy,
+              color: AppColors.textSecondary.withOpacity(0.4),
+              size: 80,
+            ),
             const SizedBox(height: 16),
             const Text(
               'No tienes reservas',
-              style: TextStyle(
-                color: AppColors.textSecondary,
-                fontSize: 18,
-              ),
+              style: TextStyle(color: AppColors.textSecondary, fontSize: 18),
             ),
             const SizedBox(height: 8),
             TextButton(
@@ -763,7 +832,10 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: esCena
                         ? Colors.indigo.withOpacity(0.2)
@@ -792,7 +864,10 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
                 ),
                 const SizedBox(width: 8),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: Colors.green.withOpacity(0.15),
                     borderRadius: BorderRadius.circular(8),
@@ -809,7 +884,11 @@ class _ReservarMesaScreenState extends State<ReservarMesaScreen>
                 const Spacer(),
                 IconButton(
                   onPressed: () => _eliminarReserva(reserva.id),
-                  icon: const Icon(Icons.delete_outline, color: AppColors.error, size: 22),
+                  icon: const Icon(
+                    Icons.delete_outline,
+                    color: AppColors.error,
+                    size: 22,
+                  ),
                   tooltip: 'Cancelar reserva',
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(),

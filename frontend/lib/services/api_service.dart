@@ -9,7 +9,7 @@ import '../data/mock_data.dart';
 /// ╔══════════════════════════════════════════════════════════════╗
 /// ║  CAMBIAR A [true] CUANDO EL BACKEND ESTÉ LISTO             ║
 /// ╚══════════════════════════════════════════════════════════════╝
-const bool usarApiReal = true;
+const bool usarApiReal = false;
 
 class ApiService {
   static const String baseUrl = 'http://localhost:8000';

@@ -36,12 +36,12 @@ class ConfirmarPedidoScreen extends StatelessWidget {
       // 30% — superficie cálida
       backgroundColor: AppColors.backgroundButton,
       elevation: 0,
-      iconTheme: const IconThemeData(color: AppColors.gold), // 10% dorado
+      iconTheme: const IconThemeData(color: Colors.white), // blanco sobre rojo
       title: const Text(
         'CONFIRMAR PEDIDO',
         style: TextStyle(
           fontFamily: 'Playfair Display',
-          color: Color(0xFFF5ECD4), // blanco cálido
+          color: Colors.white, // blanco cálido
           fontSize: 18,
           fontWeight: FontWeight.w700,
           letterSpacing: 1.2,
@@ -55,7 +55,7 @@ class ConfirmarPedidoScreen extends StatelessWidget {
             gradient: LinearGradient(
               colors: [
                 Colors.transparent,
-                AppColors.gold, // 10% dorado
+                Colors.white, // acento claro
                 Colors.transparent,
               ],
             ),
@@ -74,12 +74,15 @@ class ConfirmarPedidoScreen extends StatelessWidget {
                       backgroundColor: AppColors.backgroundButton, // 30%
                       content: Row(
                         children: [
-                          Icon(Icons.delete_outline,
-                              color: AppColors.gold, size: 16), // 10%
+                          Icon(
+                            Icons.delete_outline,
+                            color: Colors.white,
+                            size: 16,
+                          ),
                           const SizedBox(width: 8),
                           const Text(
                             'Carrito vaciado',
-                            style: TextStyle(color: Color(0xFFF0E4C8)),
+                            style: TextStyle(color: Colors.white),
                           ),
                         ],
                       ),
@@ -88,10 +91,7 @@ class ConfirmarPedidoScreen extends StatelessWidget {
                 },
                 child: Text(
                   'Vaciar',
-                  style: TextStyle(
-                    color: AppColors.gold.withOpacity(0.7), // 10% dorado
-                    fontSize: 13,
-                  ),
+                  style: TextStyle(color: Colors.white70, fontSize: 13),
                 ),
               );
             }
@@ -113,14 +113,13 @@ class ConfirmarPedidoScreen extends StatelessWidget {
             height: 80,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(
-                  color: AppColors.gold.withOpacity(0.3), width: 1.5), // 10%
+              border: Border.all(color: Colors.white30, width: 1.5),
               color: AppColors.backgroundButton, // 30%
             ),
             child: const Icon(
               Icons.shopping_cart_outlined,
               size: 36,
-              color: AppColors.gold, // 10% dorado
+              color: Colors.white, // acento claro
             ),
           ),
           const SizedBox(height: 20),
@@ -128,7 +127,7 @@ class ConfirmarPedidoScreen extends StatelessWidget {
             'Tu carrito está vacío',
             style: TextStyle(
               fontFamily: 'Playfair Display',
-              color: Color(0xFFF5ECD4),
+              color: AppColors.textPrimary,
               fontSize: 20,
               fontWeight: FontWeight.w700,
             ),
@@ -137,7 +136,7 @@ class ConfirmarPedidoScreen extends StatelessWidget {
           const Text(
             'Agrega algunos productos del menú',
             style: TextStyle(
-              color: Color(0xFF7a6a50), // gris dorado apagado
+              color: Color(0xFF6B6B6B), // gris dorado apagado
               fontSize: 14,
             ),
           ),
@@ -175,7 +174,7 @@ class ConfirmarPedidoScreen extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.backgroundButton, // 30% — superficie cálida
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFF2e2418)),
+        border: Border.all(color: const Color(0xFFE0DBD3)),
       ),
       child: Row(
         children: [
@@ -184,15 +183,11 @@ class ConfirmarPedidoScreen extends StatelessWidget {
             width: 56,
             height: 56,
             decoration: BoxDecoration(
-              color: const Color(0xFF251D12), // 30% más oscuro
+              color: const Color(0xFF660019), // 30% más oscuro
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(color: const Color(0xFF3a2e1e)),
+              border: Border.all(color: const Color(0xFFA6405A)),
             ),
-            child: const Icon(
-              Icons.fastfood,
-              color: AppColors.gold, // 10% dorado
-              size: 26,
-            ),
+            child: const Icon(Icons.fastfood, color: Colors.white, size: 26),
           ),
 
           const SizedBox(width: 14),
@@ -205,7 +200,7 @@ class ConfirmarPedidoScreen extends StatelessWidget {
                 Text(
                   item.producto.nombre,
                   style: const TextStyle(
-                    color: Color(0xFFF0E4C8), // blanco cálido
+                    color: Colors.white, // blanco cálido
                     fontSize: 15,
                     fontWeight: FontWeight.w600,
                     letterSpacing: 0.2,
@@ -215,7 +210,7 @@ class ConfirmarPedidoScreen extends StatelessWidget {
                 Text(
                   item.producto.descripcion,
                   style: const TextStyle(
-                    color: Color(0xFF7a6a50), // gris dorado apagado
+                    color: Colors.white70,
                     fontSize: 11,
                     fontWeight: FontWeight.w300,
                   ),
@@ -226,7 +221,7 @@ class ConfirmarPedidoScreen extends StatelessWidget {
                 Text(
                   '${item.producto.precio.toStringAsFixed(2)} €',
                   style: TextStyle(
-                    color: AppColors.gold.withOpacity(0.9), // 10% dorado
+                    color: Colors.white,
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
                   ),
@@ -246,7 +241,9 @@ class ConfirmarPedidoScreen extends StatelessWidget {
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 4),
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: AppColors.background, // 60%
                       borderRadius: BorderRadius.circular(6),
@@ -254,7 +251,7 @@ class ConfirmarPedidoScreen extends StatelessWidget {
                     child: Text(
                       '${item.cantidad}',
                       style: const TextStyle(
-                        color: Color(0xFFF0E4C8),
+                        color: AppColors.textPrimary,
                         fontWeight: FontWeight.w600,
                         fontSize: 14,
                       ),
@@ -270,7 +267,7 @@ class ConfirmarPedidoScreen extends StatelessWidget {
               Text(
                 '${item.subtotal.toStringAsFixed(2)} €',
                 style: const TextStyle(
-                  color: Color(0xFFF0E4C8),
+                  color: Colors.white,
                   fontSize: 13,
                   fontWeight: FontWeight.w600,
                 ),
@@ -283,10 +280,7 @@ class ConfirmarPedidoScreen extends StatelessWidget {
   }
 
   // ── Botón +/- cantidad ────────────────────────────────────────────
-  Widget _cantidadBtn({
-    required IconData icon,
-    required VoidCallback onTap,
-  }) {
+  Widget _cantidadBtn({required IconData icon, required VoidCallback onTap}) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -294,11 +288,11 @@ class ConfirmarPedidoScreen extends StatelessWidget {
         height: 28,
         margin: const EdgeInsets.symmetric(horizontal: 4),
         decoration: BoxDecoration(
-          color: const Color(0xFF251D12), // 30% más oscuro
+          color: const Color(0xFF660019), // 30% más oscuro
           borderRadius: BorderRadius.circular(6),
-          border: Border.all(color: AppColors.gold.withOpacity(0.4)), // 10%
+          border: Border.all(color: Colors.white30),
         ),
-        child: Icon(icon, color: AppColors.gold, size: 16), // 10%
+        child: Icon(icon, color: Colors.white, size: 16),
       ),
     );
   }
@@ -316,9 +310,7 @@ class ConfirmarPedidoScreen extends StatelessWidget {
           topLeft: Radius.circular(20),
           topRight: Radius.circular(20),
         ),
-        border: const Border(
-          top: BorderSide(color: Color(0xFF2e2418)),
-        ),
+        border: const Border(top: BorderSide(color: Color(0xFFE0DBD3))),
       ),
       child: Column(
         children: [
@@ -328,7 +320,7 @@ class ConfirmarPedidoScreen extends StatelessWidget {
             height: 2,
             margin: const EdgeInsets.only(bottom: 16),
             decoration: BoxDecoration(
-              color: AppColors.gold.withOpacity(0.5),
+              color: Colors.white38,
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -351,11 +343,7 @@ class ConfirmarPedidoScreen extends StatelessWidget {
             height: 1,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [
-                  Colors.transparent,
-                  AppColors.gold,
-                  Colors.transparent,
-                ],
+                colors: [Colors.transparent, Colors.white, Colors.transparent],
               ),
             ),
           ),
@@ -369,7 +357,7 @@ class ConfirmarPedidoScreen extends StatelessWidget {
                 'Total',
                 style: TextStyle(
                   fontFamily: 'Playfair Display',
-                  color: Color(0xFFF5ECD4),
+                  color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
                 ),
@@ -377,7 +365,7 @@ class ConfirmarPedidoScreen extends StatelessWidget {
               Text(
                 '${total.toStringAsFixed(2)} €',
                 style: const TextStyle(
-                  color: AppColors.gold, // 10% dorado
+                  color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
                 ),
@@ -402,11 +390,10 @@ class ConfirmarPedidoScreen extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.backgroundButton, // 30%
-                foregroundColor: AppColors.gold,              // 10% dorado
+                foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(13),
-                  side: const BorderSide(
-                      color: AppColors.gold, width: 1.5), // 10%
+                  side: const BorderSide(color: Colors.white, width: 1.5),
                 ),
                 elevation: 0,
               ),
@@ -437,17 +424,15 @@ class ConfirmarPedidoScreen extends StatelessWidget {
       children: [
         Text(
           label,
-          style: const TextStyle(
-            color: Color(0xFF7a6a50), // gris dorado apagado
+          style: TextStyle(
+            color: Colors.white.withValues(alpha: 0.7),
             fontSize: 14,
           ),
         ),
         Text(
           valor,
           style: TextStyle(
-            color: valorDorado
-                ? AppColors.gold           // 10% dorado para "Gratis"
-                : const Color(0xFFF0E4C8), // blanco cálido para precios
+            color: valorDorado ? Colors.white : Colors.white,
             fontSize: 14,
             fontWeight: FontWeight.w500,
           ),
