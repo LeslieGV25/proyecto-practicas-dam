@@ -75,11 +75,11 @@ class _ServicioTrabajadorState extends State<ServicioTrabajador> {
             height: 52,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: AppColors.gold, width: 1.5),
+              border: Border.all(color: Colors.white, width: 1.5),
             ),
             child: const Icon(
               Icons.room_service_outlined,
-              color: AppColors.gold, // 10% dorado
+              color: Colors.white, // acento claro
               size: 24,
             ),
           ),
@@ -91,7 +91,7 @@ class _ServicioTrabajadorState extends State<ServicioTrabajador> {
             "Servicio",
             style: TextStyle(
               fontFamily: 'Playfair Display',
-              color: Color(0xFFF5ECD4), // blanco cálido
+              color: Colors.white, // blanco cálido
               fontSize: 24,
               fontWeight: FontWeight.w700,
               letterSpacing: 0.5,
@@ -104,7 +104,7 @@ class _ServicioTrabajadorState extends State<ServicioTrabajador> {
           Text(
             "SELECCIONA UNA OPCIÓN",
             style: TextStyle(
-              color: AppColors.gold.withOpacity(0.8), // 10% dorado
+              color: Colors.white70, // 10% dorado
               fontSize: 10,
               letterSpacing: 3,
               fontWeight: FontWeight.w400,
@@ -116,7 +116,7 @@ class _ServicioTrabajadorState extends State<ServicioTrabajador> {
           // Separador con degradado dorado — acento 10%
           Row(
             children: [
-              const Expanded(child: Divider(color: Color(0xFF2e2418))),
+              const Expanded(child: Divider(color: Color(0xFFE0DBD3))),
               Container(
                 width: 60,
                 height: 1.5,
@@ -124,13 +124,13 @@ class _ServicioTrabajadorState extends State<ServicioTrabajador> {
                   gradient: LinearGradient(
                     colors: [
                       Colors.transparent,
-                      AppColors.gold, // 10% dorado
+                      Colors.white, // acento claro
                       Colors.transparent,
                     ],
                   ),
                 ),
               ),
-              const Expanded(child: Divider(color: Color(0xFF2e2418))),
+              const Expanded(child: Divider(color: Color(0xFFE0DBD3))),
             ],
           ),
         ],
@@ -152,7 +152,7 @@ class _ServicioTrabajadorState extends State<ServicioTrabajador> {
         decoration: BoxDecoration(
           // 30% — superficie de la tarjeta
           color: AppColors.backgroundButton,
-          border: Border.all(color: const Color(0xFF2e2418)),
+          border: Border.all(color: const Color(0xFFE0DBD3)),
           borderRadius: BorderRadius.circular(14),
         ),
         child: Row(
@@ -162,13 +162,13 @@ class _ServicioTrabajadorState extends State<ServicioTrabajador> {
               width: 42,
               height: 42,
               decoration: BoxDecoration(
-                color: const Color(0xFF251D12), // 30% más oscuro
+                color: const Color(0xFF660019), // 30% más oscuro
                 borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: const Color(0xFF3a2e1e)),
+                border: Border.all(color: const Color(0xFFA6405A)),
               ),
               child: Icon(
                 icon,
-                color: AppColors.gold, // 10% dorado
+                color: Colors.white, // acento claro
                 size: 20,
               ),
             ),
@@ -183,7 +183,7 @@ class _ServicioTrabajadorState extends State<ServicioTrabajador> {
                   Text(
                     text,
                     style: const TextStyle(
-                      color: Color(0xFFF0E4C8), // blanco cálido
+                      color: Colors.white, // blanco cálido
                       fontSize: 17,
                       fontWeight: FontWeight.w600,
                       letterSpacing: 0.2,
@@ -193,7 +193,7 @@ class _ServicioTrabajadorState extends State<ServicioTrabajador> {
                   Text(
                     subtitle,
                     style: const TextStyle(
-                      color: Color(0xFF7a6a50), // gris dorado apagado
+                      color: Colors.white70, // gris dorado apagado
                       fontSize: 11,
                       fontWeight: FontWeight.w300,
                       letterSpacing: 0.4,
@@ -206,7 +206,7 @@ class _ServicioTrabajadorState extends State<ServicioTrabajador> {
             // Flecha — acento dorado 10%
             Icon(
               Icons.chevron_right,
-              color: AppColors.gold.withOpacity(0.7), // 10% dorado
+              color: Colors.white54, // 10% dorado
               size: 20,
             ),
           ],

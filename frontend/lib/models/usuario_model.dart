@@ -1,3 +1,5 @@
+enum RolUsuario { cliente, trabajador, administrador }
+
 class Usuario {
   final String id;
   final String nombre;
@@ -5,6 +7,7 @@ class Usuario {
   final String contrasena;
   final String telefono;
   final String direccion;
+  final RolUsuario rol;
 
   Usuario({
     required this.id,
@@ -13,6 +16,7 @@ class Usuario {
     required this.contrasena,
     required this.telefono,
     required this.direccion,
+    this.rol = RolUsuario.cliente,
   });
 
   // Factory para crear desde JSON (útil para API real)
@@ -24,7 +28,21 @@ class Usuario {
       contrasena: json['password_hash'] ?? json['contrasena'] ?? '',
       telefono: json['telefono'] ?? '',
       direccion: json['direccion'] ?? '',
+      rol: _parseRol(json['rol']),
     );
+  }
+
+  static RolUsuario _parseRol(dynamic rol) {
+    if (rol == null) return RolUsuario.cliente;
+    switch (rol.toString().toLowerCase()) {
+      case 'trabajador':
+        return RolUsuario.trabajador;
+      case 'administrador':
+      case 'admin':
+        return RolUsuario.administrador;
+      default:
+        return RolUsuario.cliente;
+    }
   }
 
   // Copia con campos modificados
@@ -34,6 +52,7 @@ class Usuario {
     String? contrasena,
     String? telefono,
     String? direccion,
+    RolUsuario? rol,
   }) {
     return Usuario(
       id: id,
@@ -42,6 +61,7 @@ class Usuario {
       contrasena: contrasena ?? this.contrasena,
       telefono: telefono ?? this.telefono,
       direccion: direccion ?? this.direccion,
+      rol: rol ?? this.rol,
     );
   }
 
@@ -54,6 +74,7 @@ class Usuario {
       'contrasena': contrasena,
       'telefono': telefono,
       'direccion': direccion,
+      'rol': rol.name,
     };
   }
 }

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../core/colors_style.dart';
 import '../../services/api_service.dart';
 import '../../components/Cliente/producto_card.dart';
+import '../../components/Cliente/dialogo_ingredientes.dart';
 import '../../models/producto_model.dart';
 import '../../providers/cart_provider.dart';
 import 'confirmar_pedido_screen.dart';
@@ -43,16 +44,38 @@ class _MenuScreenState extends State<MenuScreen> {
     }
   }
 
-  // Método para agregar al carrito
+  // Añadir directo al carrito (sin personalización)
   void _addToCart(BuildContext context, Producto product) {
     final cart = Provider.of<CartProvider>(context, listen: false);
     cart.addItem(product);
 
-    // Feedback visual rápido para el usuario
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('${product.nombre} añadido al carrito'),
+        duration: const Duration(seconds: 1),
+        backgroundColor: AppColors.button,
+        behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
+
+  // Personalizar ingredientes y añadir al carrito
+  void _personalizarProducto(BuildContext context, Producto product) async {
+    final resultado = await mostrarDialogoIngredientes(context, product);
+    if (resultado == null) return;
+
+    if (!context.mounted) return;
+    final cart = Provider.of<CartProvider>(context, listen: false);
+    cart.addItem(product, ingredientesExcluidos: resultado);
+
+    final textoExtra = resultado.isNotEmpty
+        ? ' (sin ${resultado.join(', ')})'
+        : '';
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('${product.nombre}$textoExtra añadido al carrito'),
         duration: const Duration(seconds: 1),
         backgroundColor: AppColors.button,
         behavior: SnackBarBehavior.floating,
@@ -138,6 +161,9 @@ class _MenuScreenState extends State<MenuScreen> {
                         return ProductoCard(
                           product: product,
                           onAdd: () => _addToCart(context, product),
+                          onPersonalizar: product.ingredientes.isNotEmpty
+                              ? () => _personalizarProducto(context, product)
+                              : null,
                         );
                       },
                     ),
@@ -163,7 +189,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 backgroundColor: AppColors.button,
                 child: const Icon(
                   Icons.shopping_bag_outlined,
-                  color: Colors.black,
+                  color: Colors.white,
                   size: 28,
                 ),
               ),
@@ -236,7 +262,7 @@ class _MenuScreenState extends State<MenuScreen> {
               child: Text(
                 _categorias[index],
                 style: TextStyle(
-                  color: isSelected ? Colors.black : AppColors.textSecondary,
+                  color: isSelected ? Colors.white : AppColors.textSecondary,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                 ),
               ),

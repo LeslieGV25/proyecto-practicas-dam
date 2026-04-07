@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/colors_style.dart';
 import '../../providers/auth_provider.dart';
+import 'home_screen.dart';
 import 'historial_pedidos_screen.dart';
 
 class PerfilScreen extends StatefulWidget {
@@ -336,7 +337,10 @@ class _PerfilScreenState extends State<PerfilScreen> {
                     listen: false,
                   );
                   auth.cerrarSesion();
-                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (_) => const HomeScreen()),
+                    (route) => false,
+                  );
                 },
               ),
 

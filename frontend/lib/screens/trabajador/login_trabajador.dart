@@ -5,7 +5,6 @@ import 'package:frontend/providers/auth_provider.dart';
 import 'package:frontend/screens/home_screen_trabajador.dart';
 import 'package:provider/provider.dart';
 
-
 class LoginTrabajador extends StatefulWidget {
   const LoginTrabajador({super.key});
 
@@ -51,7 +50,7 @@ class _LoginTrabajadorState extends State<LoginTrabajador> {
             ),
             child: const Icon(
               Icons.restaurant,
-              color: AppColors.gold, 
+              color: AppColors.gold,
               size: 28,
             ),
           ),
@@ -62,7 +61,7 @@ class _LoginTrabajadorState extends State<LoginTrabajador> {
             "Iniciar Sesión",
             style: TextStyle(
               fontFamily: 'Playfair Display',
-              color: Color(0xFFF5ECD4),
+              color: Color(0xFF2D2D2D),
               fontSize: 30,
               fontWeight: FontWeight.w700,
               letterSpacing: 0.5,
@@ -85,7 +84,7 @@ class _LoginTrabajadorState extends State<LoginTrabajador> {
 
           Row(
             children: [
-              const Expanded(child: Divider(color: Color(0xFF2e2418))),
+              const Expanded(child: Divider(color: Color(0xFFE0DBD3))),
               Container(
                 width: 60,
                 height: 1.5,
@@ -93,13 +92,13 @@ class _LoginTrabajadorState extends State<LoginTrabajador> {
                   gradient: LinearGradient(
                     colors: [
                       Colors.transparent,
-                      AppColors.gold, 
+                      AppColors.gold,
                       Colors.transparent,
                     ],
                   ),
                 ),
               ),
-              const Expanded(child: Divider(color: Color(0xFF2e2418))),
+              const Expanded(child: Divider(color: Color(0xFFE0DBD3))),
             ],
           ),
 
@@ -144,9 +143,9 @@ class _LoginTrabajadorState extends State<LoginTrabajador> {
   Widget _inputWrapper({required Widget child}) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.backgroundButton, 
+        color: AppColors.panel,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: const Color(0xFF2e2418)),
+        border: Border.all(color: AppColors.line),
       ),
       child: child,
     );
@@ -170,8 +169,8 @@ class _LoginTrabajadorState extends State<LoginTrabajador> {
       ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.backgroundButton, 
-          foregroundColor: AppColors.gold,              
+          backgroundColor: AppColors.button,
+          foregroundColor: Colors.white,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(13),
           ),
@@ -180,7 +179,7 @@ class _LoginTrabajadorState extends State<LoginTrabajador> {
         onPressed: _isLoading ? null : _iniciarSesion,
         child: _isLoading
             ? const CircularProgressIndicator(
-                color: AppColors.gold, 
+                color: AppColors.gold,
                 strokeWidth: 2,
               )
             : const Text(
@@ -229,9 +228,9 @@ class _LoginTrabajadorState extends State<LoginTrabajador> {
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error: ${e.toString()}')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Error: ${e.toString()}')));
       }
     } finally {
       if (mounted) {
