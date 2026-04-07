@@ -217,6 +217,17 @@ class ConfirmarPedidoScreen extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
+                if (item.ingredientesExcluidos.isNotEmpty) ...[
+                  const SizedBox(height: 3),
+                  Text(
+                    'Sin: ${item.ingredientesExcluidos.join(', ')}',
+                    style: const TextStyle(
+                      color: Colors.orangeAccent,
+                      fontSize: 11,
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                ],
                 const SizedBox(height: 6),
                 Text(
                   '${item.producto.precio.toStringAsFixed(2)} €',

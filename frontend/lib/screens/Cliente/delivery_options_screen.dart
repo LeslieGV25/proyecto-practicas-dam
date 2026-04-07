@@ -343,6 +343,8 @@ class _PantallaOpcionesEntregaState extends State<PantallaOpcionesEntrega> {
               'nombre': item.producto.nombre,
               'cantidad': item.cantidad,
               'precio': item.producto.precio,
+              if (item.ingredientesExcluidos.isNotEmpty)
+                'sin': item.ingredientesExcluidos,
             },
           )
           .toList();
